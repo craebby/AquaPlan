@@ -3,6 +3,7 @@ package de.craebby.aquaplan;
 import java.io.IOException;
 
 import de.craebby.aquaplan.model.Tank;
+import de.craebby.aquaplan.view.TankEditDialogController;
 import de.craebby.aquaplan.view.TankOverviewController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainApp extends Application {
@@ -78,6 +80,36 @@ public class MainApp extends Application {
             
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    
+    public boolean showTankEditDialog(Tank tank) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/TankEditDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Person");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            TankEditDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setTank(tank);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
