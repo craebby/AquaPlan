@@ -74,9 +74,9 @@
                   </GridPane>
                   <ButtonBar layoutX="41.0" layoutY="544.0" prefHeight="40.0" prefWidth="340.0" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0">
                     <buttons>
-                      <Button mnemonicParsing="false" text="Neu..." />
-                        <Button mnemonicParsing="false" text="Editieren..." />
-                        <Button mnemonicParsing="false" text="Löschen" />
+                      <Button mnemonicParsing="false" onAction="#handleNewTank" text="Neu..." />
+                        <Button mnemonicParsing="false" onAction="#handleEditTank" text="Editieren..." />
+                        <Button mnemonicParsing="false" onAction="#handleDeleteTank" text="Löschen" />
                     </buttons>
                   </ButtonBar>
                </children>
